@@ -63,7 +63,3 @@ gem 'kaminari'
 gem 'hirb'
 gem 'hirb-unicode'
 gem 'devise'
-
-gem "dockerfile-rails", ">= 1.5", :group => :development
-
-
