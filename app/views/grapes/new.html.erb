@@ -1,0 +1,106 @@
+<%= form_for(@grape, class: 'form-horizontal', role: 'form') do |f| %>
+    <div class="container-sindan">
+        <div class="row">
+          <div class="row-q>
+            <div class="col-12">
+              <p class="col-p12">Question1. 今の気分は？…</p>
+            </div>
+            <div class="col-box">
+              <div class="col-6">
+                <p><%= f.check_box :question, {multiple: true, class: "check1"}, "1", "" %><br>テンション上げたい！</p>
+              </div>
+              <div class="col-6">
+                <p><%= f.check_box :question, {multiple: true, class: "check1"}, "2", "" %><br>しっとり落ち着きたい</p>
+              </div>
+            </div>  
+          </div>
+          <div class="row-q>
+            <div class="col-12">
+              <p class="col-p12">Question2. 映像は…</p>
+            </div>
+            <div class="col-box">
+              <div class="col-6">
+                <p><%= f.check_box :question, {multiple: true, class: "check2"}, "1", "" %><br>ハッチャン専用がいい</p>
+              </div>
+              <div class="col-6">
+                <p><%= f.check_box :question, {multiple: true, class: "check2"}, "2", "" %><br>気にしない</p>
+              </div>
+            </div>  
+          </div>
+          <div class="row-q>
+            <div class="col-12">
+              <p class="col-p12">Question3. 歌っている人は…</p>
+            </div>
+            <div class="col-box">
+              <div class="col-6">
+                <p><%= f.check_box :question, {multiple: true, class: "check3"}, "1", "" %><br>ハッチャンオンリー</p>
+              </div>
+              <div class="col-6">
+                <p><%= f.check_box :question, {multiple: true, class: "check3"}, "2", "" %><br>コラボ</p>
+              </div>
+            </div>  
+          </div>
+          <div class="row-q>
+            <div class="col-12">
+              <p class="col-p12">Question4. 歌に求めるものは…</p>
+            </div>
+            <div class="col-box">
+              <div class="col-6">
+                <p><%= f.check_box :question, {multiple: true, class: "check4"}, "1", "" %><br>かっこよさ</p>
+              </div>
+              <div class="col-6">
+                <p><%= f.check_box :question, {multiple: true, class: "check4"}, "2", "" %><br>香ばし癖つよ</p>
+              </div>
+            </div>  
+          </div>
+        </div>
+    </div>
+
+
+    <div class="sindanbotan">
+        <%= f.submit "結果を見る" %>
+    </div>
+
+
+<% end %>
+<script src="https://code.jquery.com/jquery-3.7.0.slim.min.js" integrity="sha256-tG5mcZUtJsZvyKAxYLVXrmjKBVLd6VpVccqz/r4ypFE=" crossorigin="anonymous"></script>
+<script>
+$(function(){
+  $('.check4').on('click', function() {
+    console.log("aaa")
+    if ($(this).prop('checked')){
+      // 一旦全てをクリアして再チェックする
+      console.log("bbb")
+      $('.check4').prop('checked', false);
+      $(this).prop('checked', true);
+    }
+  });
+  $('.check3').on('click', function() {
+    console.log("aaa")
+    if ($(this).prop('checked')){
+      // 一旦全てをクリアして再チェックする
+      console.log("bbb")
+      $('.check3').prop('checked', false);
+      $(this).prop('checked', true);
+    }
+  });
+  $('.check2').on('click', function() {
+    console.log("aaa")
+    if ($(this).prop('checked')){
+      // 一旦全てをクリアして再チェックする
+      console.log("bbb")
+      $('.check2').prop('checked', false);
+      $(this).prop('checked', true);
+    }
+  });
+  $('.check1').on('click', function() {
+    console.log("aaa")
+    if ($(this).prop('checked')){
+      // 一旦全てをクリアして再チェックする
+      console.log("bbb")
+      $('.check1').prop('checked', false);
+      $(this).prop('checked', true);
+    }
+  });
+});
+</script>

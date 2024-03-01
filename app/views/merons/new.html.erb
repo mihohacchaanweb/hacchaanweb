@@ -1,0 +1,13 @@
+<%= form_for @meron do |f| %>
+    <div class="field">
+      <%= f.label :タイトル %>
+      <%= f.text_field :title %>
+    </div>
+    <div class="field">
+      <%= f.label :内容 %>
+      <%= f.text_field :about %>
+    </div>
+
+    
+    <%= f.submit "投稿する" %>
+  <% end %>

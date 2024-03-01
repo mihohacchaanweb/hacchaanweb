@@ -1,0 +1,32 @@
+
+  <h1>NEWS</h1>
+  <h3>記事一覧</h3>
+
+
+
+<%= page_entries_info @Bananas %>  
+ <% @Bananas.each do |b| %>
+  <div class="tweet">
+      <%= b.title %>
+     <td><%= link_to 'Show', b %></td>
+     <td><%= link_to 'Edit', apples_pedit_path(b.id) %></td>
+     <td><%= button_to 'Destroy',apples_pindex_path(b.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  <% end %>
+ <div class="tweets-container">
+<%= paginate @Bananas %>
+
+
+
+<%= link_to 'カレンダー', apples_path %>
+<%= link_to 'トップページへ戻る', root_path %>
+<%= link_to '最新の記事へ', apples_pindex_path %>
+<%= link_to '記事の追加', apples_pnew_path %>
+
+
+
+
+  </div>
+
+
+
+

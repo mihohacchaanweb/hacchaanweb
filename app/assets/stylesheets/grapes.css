@@ -1,0 +1,148 @@
+.grapes-head{
+    font-size: 30px;
+    align-items: center;
+    margin-top: 30px;
+}
+.grapes-start{
+    font-size: 35px;
+    align-items: center;
+    margin: 200px;
+}
+.grapes-end{
+    position: sticky;
+    bottom: 0;
+    align-items: right;
+
+    padding-right: 100px;
+}
+.grapes-end-url{
+    font-size: 20px;
+}
+body{
+    background-color: #0d0918;
+}
+.container-sindan{
+    margin-top: 65px;
+}
+
+.row-q{
+margin-top: 20px;
+margin-bottom: 10px;
+}
+.col-12{
+    align-items: center;
+
+}
+p.col-p12{
+text-align: center;
+color: white;
+font-size: 40px;
+padding: 100px;
+}
+.col-box{
+    display: flex;
+    padding: 50px;
+    justify-content: center;
+}
+.col-6{
+    color:white;
+    font-size: 25px;
+    padding: 70px;
+}
+input{
+    height: 20px;
+    width: 20px;
+}
+
+.sindanbotan{
+margin-left: auto;
+margin-right: auto;
+padding-left: 50px;
+width: 200px;
+height: 100px;
+}
+
+
+
+.intoro{
+    margin-top: 75px;
+}
+p.intoro-title{
+    color: white;
+    font-size: 30px;
+    text-align: center;
+}
+p.intoro-text{
+    color: white;
+    font-size: 30px;
+    text-align: center;
+}
+
+
+
+
+.result{
+    text-align: center;
+    padding: 50px;
+}
+p.result-title{
+    color: white;
+    font-size: 35px;
+}
+.result-movie{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.result-plus{
+    display: flex;
+    justify-content: space-around;
+    margin-left: auto;
+    margin-right: auto;
+}
+.result-plus-movie{
+    padding-left: 50px;
+    padding-right: 50px;
+
+    padding-bottom: 200px;
+
+}
+
+
+
+
+
+
+
+.intoro-url{
+    text-align: right;
+    padding: 50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+input{
+    width: 100px;
+}
+
+

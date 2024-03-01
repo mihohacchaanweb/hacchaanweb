@@ -1,0 +1,52 @@
+<%= form_with(model: @apple, local: true) do |form| %>
+
+    <div class="video">
+      <%= form.label :動画タイトル %>
+      <%= form.text_field :video %>
+    </div>
+  
+      <div class="time">
+      <%= form.label :動画の公開日 %>
+      <%= form.datetime_select :start_time %>
+    </div>
+  
+    <%= form.label :youtubeのリンク %>
+    <%= form.text_field :youtube_url, :size => 140 %>
+  
+   
+    <div class="field">
+     <%= form.label :動画ジャンル %>
+     <%= form.select :genre, 
+     [["配信", "配信"], 
+     ["動画", "動画"], 
+     ["歌", "歌"],
+     ["コラボ（他チャンネル様投稿）", "コラボ（他チャンネル様投稿）"], 
+     ["切り抜き", "切り抜き"],
+     ["その他", "その他"],
+     ], include_blank: "選択して下さい" %>
+    </div>
+
+    <div class="about">
+    <%= form.label :詳細（参加者など） %>
+    <%= form.text_field :about %>
+  </div>
+
+
+    <div class="submit">
+      <%= form.submit "記録する" %>
+    </div>
+  
+  <% end %>
+  <%= form_for @meron do |f| %>
+    <div class="field">
+      <%= f.label :タイトル %>
+      <%= f.text_field :title %>
+    </div>
+    <div class="field">
+      <%= f.label :内容 %>
+      <%= f.text_field :about %>
+    </div>
+
+    
+    <%= f.submit "投稿する" %>
+  <% end %>

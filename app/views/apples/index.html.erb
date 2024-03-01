@@ -1,0 +1,78 @@
+<p id="notice"><%= notice %></p>
+<h1>カレンダー</h1>
+<br>
+  <%= link_to 'データを追加する', new_apple_path %>
+  <%= link_to 'カレンダーへ', apples_path %>
+  <%= link_to 'トップページへ戻る', root_path %>
+
+  
+
+
+  <%= month_calendar events: @apples do |date, apples| %>
+    <%= date.day %>
+      <% apples.each do |apple| %>
+       <div>
+         <% if apple.genre == "配信" %>
+           <%= link_to apple_path(apple.id), method: :get do %>
+           <i class="fas fa-light fa-video"></i>
+         <% end %>
+
+         <% elsif apple.genre == "動画" %>
+           <%= link_to apple_path(apple.id), method: :get do %>
+           <i class="fa-sharp fa-solid fa-camera"></i>
+         <% end %>
+
+         <% elsif apple.genre == "歌" %>
+           <%= link_to apple_path(apple.id), method: :get do %>
+           <i class="fa-solid fa-microphone"></i>
+         <% end %>
+    
+         <% elsif apple.genre == "コラボ（他チャンネル様投稿）" %>
+           <%= link_to apple_path(apple.id), method: :get do %>
+           <i class="fas fa-light fa-hand-peace"></i>
+         <% end %>
+
+         <% elsif apple.genre == "切り抜き" %>
+           <%= link_to apple_path(apple.id), method: :get do %>
+           <i class="fas fa-solid fa-scissors"></i>
+         <% end %>
+
+         <% elsif apple.genre == "その他" %>
+           <%= link_to apple_path(apple.id), method: :get do %>
+           <i class="fa-regular fa-paper-plane"></i>
+         <% end %>
+       </div>
+      <% end %>
+    <% end %>
+  <% end %>
+ 
+<table>
+  <thead>
+    <tr>
+      <th>動画名</th>
+      <th>投稿日</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <%= page_entries_info @Apples %>
+
+    <% @Apples.each do |a| %>
+      <tr>
+
+        <td><%= a.video %></td>
+        <td><%= a.start_time %></td>
+        <td><%= link_to 'Show', a %></td>
+ 
+        <td><%= link_to 'Edit', edit_apple_path(a.id) %></td>
+        <td><%= button_to 'Destroy',apple_path(a.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+        </tr>
+
+    <% end %>
+ <%= paginate @Apples %>
+    <div class="apples-container">
+
+  </tbody>
+</table> 

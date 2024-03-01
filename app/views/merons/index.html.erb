@@ -1,0 +1,16 @@
+<div class="meron-news">
+      <p class="main-title">NEWS一覧</p>
+
+
+      <% @merons.each do |t| %>
+        <div class="tweets-container">
+            <div class="news-title">
+              <%= t.title %>
+              <%= t.about %>
+            </div>
+            <div class="news-time">
+              <%= t.created_at.to_s(:datetime_jp) %>
+            </div>
+        </div>
+      <% end %>
+</div>

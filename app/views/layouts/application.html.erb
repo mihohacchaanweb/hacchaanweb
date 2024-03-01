@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ファンサイト</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css">  </head>
+
+  <body>
+  <div class="header-all">
+    <header>
+      <div class="header-button">
+      <%= link_to "ハッチャン非公式ファンサイト", root_path, class: "button-style" %>
+      </div>  
+      <div class="header-list">
+      <ul>
+      <li> <a href="#hot-streaming">おすすめ動画</a>
+      <li> <a href="#rec-song">歌動画診断</a>
+      <li> <a href="#whoshacchan">who's hacchan?</a>
+      <li> <%= link_to "ログイン", root_path, class: "button-style" %>
+      <li> <%= link_to "新規登録", new_user_registration_path, class: "button-style" %>
+      <li> <%= button_to 'ログアウト', destroy_user_session_path, method: :delete, class: "button-style" %>
+      </ul>
+      </div>
+
+    </header>
+    <div class="header-line">
+    </div>
+  </div>    
+    <main>
+      <%= yield %>
+    </main>
+
+
+
+
+
+  </body>
+ </html>   
+    <footer>
+      <div class="footer">
+        <div>
+          <p id="copyright">Copyright © pon. All Rights Reserved.<p>
+        </div>
+      </div>  
+    </footer>
+
+ 

@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+  <p>
+    <strong>投稿日</strong>
+    <%= @apple.start_time.strftime("%Y-%m-%d %H:%M") %>
+  </p>
+
+  <p>
+    <strong>動画</strong>
+    <%= @apple.video %>
+  </p>
+
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= find_youtube_url(@apple.youtube_url) %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+  <p>
+    <strong>ジャンル</strong>
+    <%= @apple.genre %>
+  </p>
+
+  <p>
+    <strong>詳細（参加者など）</strong>
+    <%= @apple.about %>
+  </p>
+ 
+
+<%= link_to 'Edit', edit_apple_path(@apple) %> |
+<%= link_to 'Back', apples_path %>
+<td><%= button_to 'Destroy',apple_path(@apple.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>

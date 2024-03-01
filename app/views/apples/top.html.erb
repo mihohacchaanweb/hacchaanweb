@@ -1,0 +1,639 @@
+
+<div class="overlay"></div>
+<div id="yt_player"></div>
+<script>
+     // YouTube APIの読み込み
+      var tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+ 
+      //iframe player APIコードを非同期で読み込みます。
+      var player;
+ 
+      function onYouTubeIframeAPIReady() {
+          //動画を埋め込む場所を指定(1.のidを入れる)
+          player = new YT.Player('yt_player', {
+              //YouTUbeの動画IDを入れる
+              videoId: 'UPNbVY0IEA8',
+              //オプションを設定する場所
+              playerVars: {
+                  playsinline: 1,
+                  loop: 1,
+                  listType: 'playlist',
+                  playlist: 'UPNbVY0IEA8', //上と同じ動画ID_リピートするには入力必須
+                  rel: 0, // 関連動画の非表示
+                  controls: 0, // 動画プレーヤーのコントロール非表示
+              },
+ 
+              events: {
+                  'onReady': onPlayerReady,
+                  'onStateChange': onPlayerStateChange
+              }
+          });
+      }
+ 
+      //プレーヤの準備完了後に呼び出す関数
+      function onPlayerReady(event) {
+          event.target.mute(); //ミュートにしないとスマホで再生されない
+          event.target.playVideo(); //ビデオを再生
+      }
+      var done = false;
+ 
+      function onPlayerStateChange(event) {
+          var ytStatus = event.target.getPlayerState();
+          if (ytStatus == YT.PlayerState.ENDED) {
+              event.target.mute(); //ミュートにしないとスマホで再生されない
+              event.target.playVideo(); //ビデオを再生
+          }
+      }
+      // 上下左右に出てくる黒帯を非表示
+      var $WIN = $(window); // ブラウザのウインドウを取得する
+ 
+      function screen_fit () {
+          // 上下左右の縦横比を調節する関数
+          const WIN_H = $WIN.height(); // windowの高さを取得
+          const WIN_W = $WIN.width(); // windowの幅を取得
+          const screen_switch = 0.5625; // youtubeの縦横比16:9=>9/16した値
+          const screen_ratio = WIN_H / WIN_W; // windowの高さの値/windowの幅の値
+          const ratio_H = WIN_H / screen_switch; // windowの高さ/縦横比の値
+          const ratio_W = WIN_W * screen_switch; // windowの幅*縦横比の値
+ 
+          if (screen_ratio > screen_switch) {
+              // windowの高さの値/windowの幅の値>youtubeの縦横比16:9=>9/16した値
+              $("#yt_player").css({　//動画を入れる場所のid名入れる
+                  height: "100%",
+                  width: ratio_H,
+                  "margin-top": "0",
+                  "margin-left": -ratio_H / 2,
+                  left: "50%",
+                  top: "0"
+              });
+          } else {
+              $("#yt_player").css({　//APIの場所のid名入れる
+                  width: "100%",
+                  height: ratio_W,
+                  "margin-top": -ratio_W / 2,
+                  "margin-left": "0",
+                  top: "50%",
+                  left: "0"
+              });
+          }
+      }
+ 
+      $WIN.on("resize", function () {
+         screen_fit();
+      });
+ 
+      $(function () {
+          screen_fit ();
+      });
+    </script>
+
+
+    
+<div class="all-background">
+    <div class="main-contents">
+      <div class="profile">    
+          <p class="main-title" id="whoshacchan">Who's ハッチャン？</p> 
+          <div class="main-title-line">
+          </div>
+          <div class="main-title-line2">
+          </div>
+        <div class="profile-text">  
+          <p class="profile-text">Among Us配信者集団による定期船『アルティメットジャンボジェット』の船長を務め<br>
+          ゲーム力･歌唱力に優れる個人Ｖストリーマー</p>  
+          <p class="profile-text">週5日以上の配信活動や動画投稿だけでなく、配信者仲間でバンド｢あもんぴーず｣を結成し<br>
+          5月9日には東京でライブを開催し、大成功を収めた。8月25日には大阪で2回目となるライブを実施予定<br>
+          どんなエンターテインメントを見せてくれるのか、詳しくは配信や各SNSを要チェック！</p>  
+          <div class="profile-url">
+            <%= link_to '＞＞もっと知る', apples_zshow_path %>
+          </div>
+        </div>
+      </div>
+      <div class="profile-icons">
+        <div class="icons-images">
+          <a href="https://youtube.com/@HACCHAAN"><img width="50" src="/assets/yt_icon_rgb.png" alt="youtubeチャンネル"></a>
+        </div>
+        <div class="icons-images">
+          <a href="https://twitter.com/_HACCHAAN"><img width="50" src="/assets/Twitter social icons - rounded square - blue.png"></a>
+        </div>
+        <div class="icons-images">
+          <a href="https://www.instagram.com/_hacchaan/"><img width="50" src="/assets/Instagram_Glyph_Gradient.png"></a>
+        </div>
+        <div class="icons-images">
+          <a href="https://twitcasting.tv/_hacchaan"><img width="50" src="/assets/icon_live_ios_2048.png"></a>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="main-contents">
+      <div class="popular">
+          <p class=" main-title" id="hot-streaming">おすすめ3選</p>
+            <div class="main-title-line">
+            </div>
+            <div class="main-title-line2">
+            </div>
+              <div class="popular-list">
+                    <div class="populars">
+                      <div class="populars-contents1">
+                        <iframe width="576" height="324" src="https://www.youtube.com/embed/O1kNWkNaRL8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>                    
+                        <p class="pop-song">フォニイ / ハッチャン【歌ってみた】</p>
+                      </div>
+                      <div class="populars-contents2">
+                        <div class="pop-title">
+                          美しすぎる高音に注目
+                        </div>
+                        <div class="pop-text">
+                          「Among usプレイ中の話し声のギャップがすごい」<br>「ハッチャンってこんなにかっこよかったのか」<br>等の声が続出
+                        </div>
+                      </div>
+                    </div>
+                    <div class="populars">
+                      <div class="populars-contents3">
+                        <iframe width="576" height="324" src="https://www.youtube.com/embed/N1B8qgcydao" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        <p class="pop-song">【断末魔】NEWS ZEROのオープニング流してキルしたら凄まじい断末魔とれたwww<br>【Among Us】【アモングアス】</p>
+                      </div>
+                      <div class="populars-contents4">
+                        <div class="pop-title">
+                          近くの人と話せる<br>Among Us<br>断末魔シリーズのひとつ
+                        </div>
+                        <div class="pop-text">
+                          ニュースZEROのオープニングを流しながら<br>参加者を次々にキル！<br>どんな断末魔が飛び出すのか<br>ハッチャンのゲス笑いに注目！
+                        </div>
+                      </div>
+                    </div>
+                    <div class="populars">
+                      <div class="populars-contents1">
+                        <iframe width="576" height="324" src="https://www.youtube.com/embed/UPNbVY0IEA8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>                        
+                        <p class="pop-song">【MV】Who is the imposter / PROJECT ARUJAN 【 #amongus】</p>
+                      </div>
+                      <div class="populars-contents2">
+                        <div class="pop-title">
+                          ページ上部で流している曲<br>「who's imposter?」
+                        </div>
+                        <div class="pop-text">
+                          <div class="pop-text3">
+                            AMONG USのゲーム効果音を使用したEDMである<br>『AMONG US Theme Song (Moondai EDM Remix)』に<br>オリジナルの歌詞を作成
+                          </div>
+                          <div class="pop-text3">
+                            アモングアス配信集団「アルティメットジャンボジェット」による<br>初の歌動画！！     
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+              </div>
+      </div>
+
+
+    <div class="main-contents">
+      <div id="news-contents">
+        <p class="main-title">NEWS</p>
+          <div class="main-title-line">
+          </div>
+          <div class="main-title-line2">
+          </div>
+                <% @merons.each do |t| %>
+              <div class="tweets-container">
+                  <div class="news-title">
+                    <%= t.title %>
+                  </div>
+                  <div class="news-time">
+                    <%= t.created_at.to_s(:datetime_jp) %>
+                  </div>
+              </div>
+            <% end %>
+
+            <div class="news-to-index">
+              <%= link_to '＞＞ニュース一覧', merons_path %>
+            </div>
+      </div>  
+    </div>
+
+    <div class="main-contents">
+      <p class=" main-title">カレンダー</p>
+        <div class="main-title-line">
+        </div>
+        <div class="main-title-line2">
+        </div>
+      <div class="caltwi">
+        <div class="calendar">
+          <div class="cal-index">
+            <p id="notice"><%= notice %></p>
+                <br>
+                  <%= month_calendar events: @apples do |date, apples| %>
+                    <%= date.day %>
+                      <% apples.each do |apple| %>
+                      <div class="icons">
+                        <% if apple.genre == "配信" %>
+                          <%= link_to apple_path(apple.id), method: :get do %>
+                          <i class="fas fa-light fa-video"></i>
+                        <% end %>                
+                        <% elsif apple.genre == "動画" %>
+                          <%= link_to apple_path(apple.id), method: :get do %>
+                          <i class="fa-sharp fa-solid fa-camera"></i>
+                        <% end %>  
+                        <% elsif apple.genre == "歌" %>
+                          <%= link_to apple_path(apple.id), method: :get do %>
+                          <i class="fa-solid fa-microphone"></i>
+                        <% end %>                  
+                        <% elsif apple.genre == "コラボ（他チャンネル様投稿）" %>
+                          <%= link_to apple_path(apple.id), method: :get do %>
+                          <i class="fas fa-light fa-hand-peace"></i>
+                        <% end %>
+                        <% elsif apple.genre == "切り抜き" %>
+                          <%= link_to apple_path(apple.id), method: :get do %>
+                          <i class="fas fa-solid fa-scissors"></i>              
+                        <% end %>
+                        <% elsif apple.genre == "その他" %>
+                          <%= link_to apple_path(apple.id), method: :get do %>
+                          <i class="fa-regular fa-paper-plane"></i>              
+                        <% end %>
+                      </div>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                </br>
+          <div class="cal-to-index">
+            <%= link_to 'カレンダー詳細', apples_path %>
+          </div> 
+          <div class="cal-icon">
+            <p class="cal-icon-top">各アイコンの説明</p>
+            <div class="cal-icon-line">
+            </div>
+            <div class="cal-icons">
+              <div class="cal-icons1"> 
+                <div class="cal-icons6">
+                  <i class="fas fa-light fa-video"></i>   配信アーカイブ
+                </div>
+                <div class="cal-icons6">
+                  <i class="fa-sharp fa-solid fa-camera"></i> 動画
+                </div>
+                <div class="cal-icons6">
+                  <i class="fa-solid fa-microphone"></i>  歌動画
+                </div>
+              </div>  
+              <div class="cal-icons1"> 
+                <div class="cal-icons6">
+                  <i class="fas fa-light fa-hand-peace"></i>  コラボ動画
+                </div>
+                <div class="cal-icons6">
+                  <i class="fas fa-solid fa-scissors"></i>  切り抜き動画
+                </div>
+                <div class="cal-icons6">
+                  <i class="fa-regular fa-paper-plane"></i> その他
+                </div>
+              </div>  
+            </div>  
+  
+          </div>
+          
+          </div>
+
+        </div>
+        <div class="twitter">
+              <a class="twitter-timeline" data-lang="ja" data-width="400" data-height="1000" href="https://twitter.com/_HACCHAAN?ref_src=twsrc%5Etfw">Tweets by _HACCHAAN</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>   
+      </div>
+    </div>
+
+    <div class="main-contents">
+      <div class="genre-movie">
+        <div id="syurui">
+          <p class=" main-title">動画ジャンル</p>
+            <div class="main-title-line">
+            </div>
+            <div class="main-title-line2">
+            </div>
+        </div>
+
+        <div class="pop-movie-top">
+        <div class="hexagon3">
+          <%= link_to "ハ", root_path, class: "hex-link" %>
+        </div>
+          <div class="hexagon2">
+          </div>
+
+          <div class="hexagon1">
+
+            <label class="open" for="text9">あもあす</label>
+              <input type="checkbox" id="pop-up9">
+                <div class="overlay">
+                  <label class="close" for="pop-up9">×</label>
+                    <div class="window">
+                      <div class="text">ポップアップの中身が入ります
+                      </div>
+                    </div>
+                </div>
+          </div>
+
+
+        </div>  
+      </div>
+    </div>
+
+    <div class="main-contents">
+      <div class="genre-streaming">
+          <p class=" main-title">配信ジャンル</p>
+            <div class="main-title-line">
+            </div>
+            <div class="main-title-line2">
+            </div>
+      <div class="pop-movie-top">
+        <div class="pop-streaming">
+            <label class="open" for="pop-up101">長時間</label>
+              <input type="checkbox" id="pop-up101">
+                <div class="overlay">
+                  <div class="window">
+                    <label class="close" for="pop-up101">×</label>
+                    <p class="text">ポップアップの中身が入ります</p>
+                  </div>
+                </div>
+        </div>
+
+        <div class="pop-streaming">
+          <label class="open" for="pop-up102">シリーズ1st</label>
+            <input type="checkbox" id="pop-up102">
+              <div class="overlay">
+                <div class="window">
+                  <label class="close" for="pop-up102">×</label>
+                  <p class="text">ポップアップの中身が入ります</p>
+                </div>
+              </div>
+        </div>
+
+        <div class="pop-streaming">
+          <label class="open" for="pop-up103">みりしら</label>
+            <input type="checkbox" id="pop-up103">
+              <div class="overlay">
+                <div class="window">
+                  <label class="close" for="pop-up103">×</label>
+                  <p class="text">ポップアップの中身が入ります</p>
+                </div>
+              </div>
+        </div>
+
+        <div class="pop-streaming">
+          <label class="open" for="pop-up104">TRPG</label>
+            <input type="checkbox" id="pop-up104">
+              <div class="overlay">
+                <div class="window">
+                  <label class="close" for="pop-up104">×</label>
+                  <p class="text">ポップアップの中身が入ります</p>
+                </div>
+              </div>
+        </div>
+
+        <div class="pop-streaming">
+          <label class="open" for="pop-up105">雑談</label>
+            <input type="checkbox" id="pop-up105">
+              <div class="overlay">
+                <div class="window">
+                  <label class="close" for="pop-up105">×</label>
+                  <p class="text">ポップアップの中身が入ります</p>
+                </div>
+              </div>
+        </div>
+
+        <div class="pop-streaming">
+          <label class="open" for="pop-up106">ベストヒット</label>
+            <input type="checkbox" id="pop-up106">
+              <div class="overlay">
+                <div class="window">
+                  <label class="close" for="pop-up106">×</label>
+                  <p class="text">ポップアップの中身が入ります</p>
+                </div>
+              </div>
+        </div>
+
+        <div class="pop-streaming">
+          <label class="open" for="pop-up107">あもあす</label>
+            <input type="checkbox" id="pop-up107">
+              <div class="overlay">
+                <div class="window">
+                  <label class="close" for="pop-up107">×</label>
+                  <p class="text">ポップアップの中身が入ります</p>
+                </div>
+              </div>
+        </div>
+
+        <div class="pop-streaming">
+          <label class="open" for="pop-up108">参加型</label>
+            <input type="checkbox" id="pop-up108">
+              <div class="overlay">
+                <div class="window">
+                  <label class="close" for="pop-up108">×</label>
+                  <p class="text">ポップアップの中身が入ります</p>
+                </div>
+              </div>
+        </div>
+
+        <div class="pop-streaming">
+          <label class="open" for="pop-up109">実写</label>
+            <input type="checkbox" id="pop-up109">
+              <div class="overlay">
+                <div class="window">
+                  <label class="close" for="pop-up109">×</label>
+                  <p class="text">ポップアップの中身が入ります</p>
+                </div>
+              </div>
+        </div>
+
+        <div class="pop-streaming">
+          <label class="open" for="pop-up110">記念</label>
+            <input type="checkbox" id="pop-up110">
+              <div class="overlay">
+                <div class="window">
+                  <label class="close" for="pop-up110">×</label>
+                  <p class="text">ポップアップの中身が入ります</p>
+                </div>
+              </div>
+        </div>
+
+        <div class="pop-streaming">
+          <label class="open" for="pop-up111">歌</label>
+            <input type="checkbox" id="pop-up111">
+              <div class="overlay">
+                <div class="window">
+                  <label class="close" for="pop-up111">×</label>
+                  <p class="text">ポップアップの中身が入ります</p>
+                </div>
+              </div>
+        </div>
+      </div>  
+      </div>
+    </div>
+
+    <div class="main-contents">
+      <div id="osusume-container">
+            <p class=" main-title" id="rec-song">おすすめ歌動画診断</p>
+              <div class="main-title-line">
+              </div>
+              <div class="main-title-line2">
+              </div>
+          <div class="osusume-to-url">
+            <%= link_to '診断する', new_grape_path, class:"btn btn-border"%>
+          </div>
+
+
+                <div class="osusume">
+                  <div class="slide-container">
+                    <div class="slide-wrapper">
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/TJQSAiQYwag/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/UPNbVY0IEA8/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/LtMdjZaPySk/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/nDgjfIMXmWw/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/ps2Do_Y5qVc/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/S2Y4u-mSJIU/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/9AXAeuvLRYA/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/dgELZXZXOMc/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/KrlmviDSI1Y/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/I7AixHeBp0Y/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/-5dQnlLovyo/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/i4yLffTWSK4/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/qI8Nt4367yI/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/blg2yFkHEY4/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/--_w52FeWpA/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/h_RrmeTBl0k/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/Wto-qJ2UqNQ/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/nyjq_biu-Yo/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/-Joxuf_fNRA/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/O1kNWkNaRL8/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/iWUKT0tYOTg/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/csZPYCB8qpI/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/vHJBFcuajc8/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/IpXlwqlDCXI/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/Qu5iiRBQ8yQ/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/ID1GVgV4alg/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/0JUFj58VPi0/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/ixTBmAPhCAk/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/1eecU6t636w/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/n1XlQU7Rcak/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/xiavsdVGXlQ/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/D16-sLs2jI8/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/XeHcPevpx3Q/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/z697P1PYc1g/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/d6e4zYLTECE/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/jClmIu9HBiw/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/btyL4EUL6Ys/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/j9aCHBJBscY/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/-X-iO7qib0I/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/OoOfOJJLFH0/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/KguI7xpGx8o/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/AAfijXYIyKA/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/8yD-IaubKck/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/6Fz2CXZ1UPM/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/ENOqFbqaoyE/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/3k9bINijIp4/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/OJvCbwEeQpA/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/w6psQJ8-zC8/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/gdbTk08LHJ8/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/j8NWsaX3oio/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/YyTSdzBV_z0/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/DVelI8nW9vI/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/Kbyl0NRsAqw/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/7JvgbbPgtfs/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/eFlFnu_qbJA/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/9ot4N6ThxfE/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/l8wobUkqzRA/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/DJMdzOSH_RE/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/SpoVRxH2Rws/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/e9zBx2COsg4/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/Dmb_0Ok2zyE/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/r0DGyX0vis0/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/iKbpVrjxIdc/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/SL76IWbSBio/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/L55NaA8UWtA/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/vvpCEWu2s2c/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/-zh_aLK2pn4/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/qKa7QSBbmRI/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/1heU0p0HanE/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+
+                    </div>
+                    <div class="slide-wrapper">
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/TJQSAiQYwag/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/UPNbVY0IEA8/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/LtMdjZaPySk/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/nDgjfIMXmWw/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/ps2Do_Y5qVc/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/S2Y4u-mSJIU/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/9AXAeuvLRYA/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/dgELZXZXOMc/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/KrlmviDSI1Y/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/I7AixHeBp0Y/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/-5dQnlLovyo/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/i4yLffTWSK4/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/qI8Nt4367yI/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/blg2yFkHEY4/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/--_w52FeWpA/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/h_RrmeTBl0k/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/Wto-qJ2UqNQ/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/nyjq_biu-Yo/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/-Joxuf_fNRA/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/O1kNWkNaRL8/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/iWUKT0tYOTg/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/csZPYCB8qpI/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/vHJBFcuajc8/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/IpXlwqlDCXI/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/Qu5iiRBQ8yQ/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/ID1GVgV4alg/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/0JUFj58VPi0/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/ixTBmAPhCAk/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/1eecU6t636w/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/n1XlQU7Rcak/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/xiavsdVGXlQ/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/D16-sLs2jI8/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/XeHcPevpx3Q/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/z697P1PYc1g/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/d6e4zYLTECE/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/jClmIu9HBiw/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/btyL4EUL6Ys/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/j9aCHBJBscY/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/-X-iO7qib0I/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/OoOfOJJLFH0/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/KguI7xpGx8o/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/AAfijXYIyKA/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/8yD-IaubKck/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/6Fz2CXZ1UPM/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/ENOqFbqaoyE/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/3k9bINijIp4/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/OJvCbwEeQpA/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/w6psQJ8-zC8/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/gdbTk08LHJ8/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/j8NWsaX3oio/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/YyTSdzBV_z0/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/DVelI8nW9vI/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/Kbyl0NRsAqw/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/7JvgbbPgtfs/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/eFlFnu_qbJA/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/9ot4N6ThxfE/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/l8wobUkqzRA/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/DJMdzOSH_RE/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/SpoVRxH2Rws/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/e9zBx2COsg4/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/Dmb_0Ok2zyE/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/r0DGyX0vis0/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/iKbpVrjxIdc/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/SL76IWbSBio/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/L55NaA8UWtA/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/vvpCEWu2s2c/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/-zh_aLK2pn4/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/qKa7QSBbmRI/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+                      <img class="slide" width="352" height="198" src="https://img.youtube.com/vi/1heU0p0HanE/maxresdefault.jpg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;  web-share" allowfullscreen></img>
+
+                    </div>
+                  </div>
+                </div>
+
+
+      </div>
+    </div>
+
+</div>
+
+
+
+
+</body>
+</html>

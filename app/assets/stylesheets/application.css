@@ -1,0 +1,84 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require simple_calendar 
+ *= require_tree .
+ *= require_self
+ */
+
+ * {
+    padding: 0;
+    margin: 0;
+  }
+  body {
+    padding-top: 60px;
+    font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ",
+      Meiryo, "ＭＳ Ｐゴシック", sans-serif;
+  }
+  header {
+    padding: 20px 50px; /* ヘッダーに上下左右それぞれ余白を指定 */
+    box-sizing: border-box; /* padding分を含んで幅を100%にするため */
+    position: fixed; /* ウィンドウを基準に画面に固定 */
+    z-index: 999;
+    top: 0;
+    left: 0;
+    background-color: #0d0918;
+    height: 60px;
+    width: 100%;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header-line {
+  height: 65px;
+  width: 100%;
+  box-sizing: border-box; 
+  background-color: #fefe5e;
+  position: fixed; /* ウィンドウを基準に画面に固定 */
+  z-index: 998;
+  top: 0;
+  left: 0;
+  }
+  header a {
+    color: white; 
+    text-decoration: none; 
+  }
+  header h1 {
+    color: white;
+    margin-left: 20px;
+    margin: 40px;
+  }
+  .header-list {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+  }
+  header ul {
+    display: flex;
+  }
+  header li {
+    list-style: none;
+    margin-right: 40px;
+  }
+  footer{
+    z-index: 999;
+    position: sticky;
+    top: 100vh;
+    background-color: #fefe5e;
+    height: 40px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
